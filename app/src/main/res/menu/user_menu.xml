@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/main_menu"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/catalog"
+            android:title="Room Catalog" ></item>
+        <item
+            android:id="@+id/book"
+            android:title="Presence" />
+        <item
+            android:id="@+id/currentBook"
+            android:title="Active Booking" />
+        <item
+            android:id="@+id/history"
+            android:title="Booking History" />
+    </group>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>

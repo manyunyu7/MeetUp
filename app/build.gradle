@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -58,6 +59,9 @@ dependencies {
 
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Calendar View
+    implementation 'com.applandeo:material-calendar-view:1.8.0-rc01'
 
     //Picasso easy image rendering
     implementation 'com.squareup.picasso:picasso:2.71828'

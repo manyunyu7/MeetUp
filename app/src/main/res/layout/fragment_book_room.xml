@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_blue" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/customToggleBookRoom"
+            android:id="@+id/title"
+            android:gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textStyle="bold"
+            android:text="Choose a Schedule"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:onClick="openCloseNavigationDrawer"
+            android:layout_margin="20dp"
+            android:id="@+id/customToggleBookRoom"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_hamburger_button" />
+    </RelativeLayout>
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="95dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerBawah"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                app:cardCornerRadius="15dp">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="21dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/title"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Choose a Perfect Date for Meeting"
+                            android:textColor="#19A3FF"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Start Time"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="24 August 2020"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="14sp" />
+
+                            <Button
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/btn_rounded_button_blue"
+                                android:text="PICK DATE"
+                                android:textColor="@color/colorWhite" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="End Time"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="14sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="24 August 2020"
+                                android:textColor="@color/colorTextSecondary"
+                                android:textSize="14sp" />
+
+                            <Button
+                                android:layout_margin="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/btn_rounded_button_blue"
+                                android:text="PICK DATE"
+                                android:textColor="@color/colorWhite" />
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="People">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Total Guest : "
+                                    android:textColor="@color/colorTextSecondary"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="10"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Guest"
+                                    android:textColor="@color/colorTextSecondary"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:background="@drawable/gradient"
+                android:text="Next"
+                android:textColor="@color/colorWhite" />
+            <TextView
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Term of Use"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/example_details"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp" />
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
