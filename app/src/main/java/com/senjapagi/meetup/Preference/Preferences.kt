@@ -22,6 +22,10 @@ class Preference(val context: Context) {
         editor.putBoolean(KEY_NAME, value)
         editor.commit()
     }
+
+
+
+
     fun getPrefBool(KEY_NAME: String): Boolean? {
         return sharedPref.getBoolean(KEY_NAME, false)
     }
@@ -33,5 +37,17 @@ class Preference(val context: Context) {
     fun clearPreferences(){
         editor.clear()
         editor.commit()
+    }
+
+    fun saveTempRoom(roomID : String){
+        editor.putString("tempRoom",roomID)
+        editor.commit()
+    }
+    fun clearTempRoom(){
+        editor.remove("tempRoom")
+        editor.commit()
+    }
+    fun getRoomID() : String? {
+        return sharedPref.getString("tempRoom",null)
     }
 }

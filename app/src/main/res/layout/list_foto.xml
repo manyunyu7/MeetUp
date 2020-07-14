@@ -9,11 +9,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="50dp"
         tools:ignore="MissingConstraints">
         <ImageView
+            android:id="@+id/roomImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/mod_house"/>
     </androidx.cardview.widget.CardView>
 

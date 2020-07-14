@@ -69,8 +69,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="25dp"
-                    app:cardCornerRadius="20dp"
-                    android:elevation="2dp"
+                    app:cardCornerRadius="25dp"
+                    android:elevation="6dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -84,10 +84,13 @@
                         android:padding="20dp">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/containerUsername"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="username"
-                            app:startIconDrawable="@drawable/ic_username">
+                            android:hint="username/email"
+                            app:endIconMode="clear_text"
+                            app:startIconDrawable="@drawable/ic_username"
+                            app:errorEnabled="true">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_username"
@@ -98,11 +101,13 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/containerPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="password"
                             app:passwordToggleEnabled="true"
-                            app:startIconDrawable="@drawable/ic_lock">
+                            app:startIconDrawable="@drawable/ic_lock"
+                            app:errorEnabled="true">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_password"

@@ -1,11 +1,25 @@
 package com.senjapagi.meetup
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.common.Priority
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.senjapagi.meetup.ModelAdapter.model_room
+import com.senjapagi.meetup.ModelAdapter.room_adapter
+import com.senjapagi.meetup.Preference.URL
+import kotlinx.android.synthetic.main.fragment_room_catalog.*
+import kotlinx.android.synthetic.main.list_foto_loading.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +35,8 @@ class room_catalog : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var adapterRoom : room_adapter
+    var data = ArrayList<model_room>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +56,16 @@ class room_catalog : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recyclerViewRoom.setHasFixedSize(true)
+        recyclerViewRoom.layoutManager = LinearLayoutManager(
+            context,RecyclerView.VERTICAL,false)
+        retreiveRoom()
+        adapterRoom= room_adapter(data,context!!,accesser = "notPicked",start = "",end = "")
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +73,62 @@ class room_catalog : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_room_catalog, container, false)
+    }
+
+    fun retreiveRoom(){
+        data.clear()
+        loading_indicator.visibility = View.VISIBLE
+        AndroidNetworking.get(URL.ROOM_ALL)
+            .setPriority(Priority.HIGH)
+            .build()
+            .getAsJSONObject(object : JSONObjectRequestListener{
+                override fun onResponse(response: JSONObject?) {
+                    loading_indicator.visibility = View.GONE
+                    //TODO("Not yet implemented")
+                    val status = response?.getBoolean("sukses")
+                    if(status!!){
+                        val totalRoom = response.getJSONArray("data")
+                            .length()
+                        makeToast(totalRoom.toString())
+                        val raz = response.getJSONArray("data")
+                        for (i in 0 until raz.length()){
+                            val id = raz.getJSONObject(i).getString("id")
+                            val name = raz.getJSONObject(i).getString("name")
+                            val capacity = raz.getJSONObject(i).getString("capacity")
+                            val thumbnail = raz.getJSONObject(i).getString("thumbnail")
+                            val desc = raz.getJSONObject(i).getString("description")
+                            val counter = raz.getJSONObject(i).getString("booked_count")
+                            val rate = raz.getJSONObject(i).getString("rate_avg")
+                            data.add(model_room(
+                                id,name,capacity,thumbnail,desc,"Booked $counter times",rate
+                            ))
+                            recyclerViewRoom.adapter = adapterRoom
+                            recyclerViewRoom.visibility = View.VISIBLE
+                            lottieListLoading.visibility = View.GONE
+                        }
+
+
+                    }else{
+                        makeToast("status gagal")
+                    }
+
+
+                }
+
+                override fun onError(anError: ANError) {
+                    //TODO("Not yet implemented")
+                    loading_indicator.visibility = View.GONE
+                    makeToast("onError")
+                    makeToast("Error "+anError.errorBody.toString())
+                }
+
+            })
+    }
+
+
+
+    fun makeToast(message : String){
+        Toast.makeText(context,message,Toast.LENGTH_LONG).show()
     }
 
     companion object {

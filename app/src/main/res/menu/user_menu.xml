@@ -7,16 +7,16 @@
             android:title="Room Catalog" ></item>
         <item
             android:id="@+id/book"
-            android:title="Presence" />
-        <item
-            android:id="@+id/currentBook"
-            android:title="Active Booking" />
+            android:title="Book a Room" />
         <item
             android:id="@+id/history"
             android:title="Booking History" />
     </group>
-    <item android:title="">
+    <item android:title="Others">
         <menu>
+            <item
+                android:id="@+id/profile"
+                android:title="My Profile" />
             <item
                 android:id="@+id/logout"
                 android:title="Logout" />

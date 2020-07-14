@@ -6,6 +6,11 @@
     <color name="colorAccent">@color/colorBlueWaves</color> //edittext color line
 
     <color name="colorBlueWaves">#0099ff</color>
+    <color name="colorGold">#ffdf00</color>
     <color name="colorTextSecondary">#A8B2C8</color>
     <color name="colorWhite">#fff</color>
+    <color name="bootstrapOrange">#f0ad4e</color>
+    <color name="bootstrapBlue">#0275d8</color>
+    <color name="bootstrapRed">#d9534f</color>
+    <color name="colorBlack">#000</color>
 </resources>

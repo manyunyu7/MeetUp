@@ -11,16 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".dashboard_client">
+        <activity
+            android:name=".TesNavDraw"
+            android:label="@string/title_activity_tes_nav_draw"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".room_available" />
+        <activity android:name=".room_details" />
+        <activity android:name=".dashboard_client" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity">
-
         </activity>
     </application>
 
