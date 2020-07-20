@@ -4,7 +4,7 @@
     android:id="@+id/lyt_book_details"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:visibility="visible"
+    android:visibility="gone"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView

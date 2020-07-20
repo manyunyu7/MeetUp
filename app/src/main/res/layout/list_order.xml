@@ -60,8 +60,21 @@
                         android:text="Ruang Bali"
                         android:textColor="#19A3FF"
                         android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/rateInt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="#FFBC03"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="⭐⭐⭐⭐⭐"
+                        android:textAlignment="textEnd"
+                        android:textColor="#FFBC03"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
@@ -69,6 +82,7 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="11sp" />
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/orderID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,18 +149,6 @@
                         android:text="150"
                         android:textColor="@color/colorTextSecondary"
                         android:textSize="12sp" />
-                    <TextView
-                        android:id="@+id/rateInt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="#FFBC03"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="⭐⭐⭐⭐⭐"
-                        android:textAlignment="textEnd"
-                        android:textColor="#FFBC03"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
 

@@ -8,15 +8,6 @@
     tools:context=".MainActivity">
 
 
-    <ImageView
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/ic_sinarmas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view_login"
         android:layout_width="wrap_content"
@@ -61,15 +52,6 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorBlueWaves"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_wave"
-                app:layout_constraintStart_toStartOf="parent" />
-
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
@@ -122,10 +104,10 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
-                            android:id="@+id/btnForgotPassword"
+                            android:id="@+id/btnLoginAdmin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Forgot Password ?"
+                            android:text="Admin Login"
                             android:textAlignment="textEnd" />
 
 

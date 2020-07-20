@@ -20,10 +20,6 @@
             <item
                 android:id="@+id/logout"
                 android:title="Logout" />
-            <item
-                android:title=""
-                android:id="@+id/logo"
-                android:icon="@drawable/ic_sinarmas"/>
         </menu>
     </item>
 </menu>

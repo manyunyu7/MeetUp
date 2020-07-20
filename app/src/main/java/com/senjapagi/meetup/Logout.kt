@@ -41,4 +41,27 @@ class Logout : AppCompatActivity {
         pDialog.show()
     }
 
+    fun logoutDialogAdminWeb() {
+        pDialog = SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
+        pDialog.titleText = "Do you want to end your session ?"
+        pDialog.setCancelable(true)
+        pDialog.confirmText = "Yes"
+        pDialog.setConfirmClickListener {
+            pDialog.dismissWithAnimation()
+            val pref = Preference(mContext)
+            pref.clearPreferences()
+            Handler().postDelayed({
+                val intent = Intent(mContext, admin_website::class.java)
+                mContext.startActivity(intent)
+            }, 700)
+
+        }
+        pDialog.showCancelButton(true)
+        pDialog.cancelText = "Cancel"
+        pDialog.setCancelClickListener {
+            pDialog.dismissWithAnimation()
+        }
+        pDialog.show()
+    }
+
 }

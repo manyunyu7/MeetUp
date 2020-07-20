@@ -108,7 +108,6 @@ class order_basic_adapter(
             else -> {
                 holder.tvRoomRatingIndicator.text = "Not Rated Yet"
                 barRating = 0
-                Toast.makeText(context, iRating.toString(), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -182,8 +181,6 @@ class order_basic_adapter(
                 val pref = Preference(context!!)
                 val orderID = order[position].id
                 AndroidNetworking.post(
-                    //api/user/daftarpemesanan/
-                    //{order_id}/rate/edit
                     "http://103.253.27.125:10000/booking/index.php?/api/user/daftarpemesanan/$orderID/rate/edit")
                     .addBodyParameter("rate", view.ratingBar.rating.toString())
                     .addBodyParameter("comment", view.etReview.text.toString())

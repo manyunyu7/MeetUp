@@ -22,7 +22,9 @@ import com.senjapagi.shsd.Preference.prefConstant
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_dasboard_admin.*
 import kotlinx.android.synthetic.main.activity_dasboard_client.*
+import kotlinx.android.synthetic.main.activity_dasboard_client.userDrawerLayout
 import kotlinx.android.synthetic.main.user_app_bar.*
 import kotlinx.android.synthetic.main.user_header.*
 import org.json.JSONObject
@@ -42,6 +44,7 @@ class dashboard_admin : AppCompatActivity() , NavigationView.OnNavigationItemSel
         setContentView(R.layout.activity_dasboard_client)
         setSupportActionBar(userToolbar)
         pref = Preference(applicationContext)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val w = window
             w.setFlags(
@@ -68,7 +71,7 @@ class dashboard_admin : AppCompatActivity() , NavigationView.OnNavigationItemSel
 
 
 
-        userNavView.setCheckedItem(R.id.catalog);
+        adminNavView.setCheckedItem(R.id.catalog);
         val drawerToggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(
             this,
             userDrawerLayout,
@@ -86,22 +89,15 @@ class dashboard_admin : AppCompatActivity() , NavigationView.OnNavigationItemSel
         fragmentCurrentBook = user_active_booking()
         fragmentProfile = user_profile()
 
-        val d = intent.getStringExtra("success_booking")
-        if(d == "1"){
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.userFrameLayout, fragmentBookHistory)
-                .commit()
-        }else{
+
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.userFrameLayout, fragmentCatalog)
                 .commit()
-        }
 
 
 
-        userNavView.setNavigationItemSelectedListener(this)
+        adminNavView.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
@@ -113,22 +109,6 @@ class dashboard_admin : AppCompatActivity() , NavigationView.OnNavigationItemSel
     //the when expression for nav draw menu listener
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.home -> {
-                transactionFragment(fragmentUserDashboard)
-            }
-            R.id.catalog -> {
-                transactionFragment(fragmentCatalog)
-            }
-            R.id.book -> {
-                transactionFragment(fragmentBookRoom)
-            }
-            R.id.history -> {
-                transactionFragment(fragmentBookHistory)
-            }
-            R.id.profile -> {
-                transactionFragment(fragmentProfile)
-            }
-
             R.id.logout -> {
                 val logout = Logout(this)
                 logout.logoutDialog()

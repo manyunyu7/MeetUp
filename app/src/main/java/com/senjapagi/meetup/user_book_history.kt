@@ -1,5 +1,6 @@
 package com.senjapagi.meetup
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,9 +21,10 @@ import com.senjapagi.meetup.Preference.URL
 import com.senjapagi.shsd.Preference.Preference
 import com.senjapagi.shsd.Preference.prefConstant
 import kotlinx.android.synthetic.main.fragment_active_booking.*
+import kotlinx.android.synthetic.main.fragment_active_booking.recyclerViewOrder
 import kotlinx.android.synthetic.main.fragment_room_catalog.*
-import kotlinx.android.synthetic.main.fragment_room_catalog.loading_indicator
 import kotlinx.android.synthetic.main.fragment_room_catalog.lottieListLoading
+import kotlinx.android.synthetic.main.fragment_user_book_history.*
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,39 +51,27 @@ class user_book_history : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
-
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerViewOrder.setHasFixedSize(true)
-        recyclerViewOrder.layoutManager = LinearLayoutManager(
-            context, RecyclerView.VERTICAL,false)
-        retreiveOrder()
-        adapterOrder= order_basic_adapter(data,context!!,getView()!!)
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-
-    fun retreiveOrder() {
+    private fun retreiveOrder() {
         data.clear()
         val pref = Preference(activity?.applicationContext!!)
-        loading_indicator.visibility = View.VISIBLE
+        lottieListLoading.visibility = View.VISIBLE
         AndroidNetworking.get(URL.ORDER_LIST_BY_USER)
             .addHeaders("user_id",pref.getPrefString(prefConstant.USER_ID))
             .setPriority(Priority.HIGH)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
+                @SuppressLint("SimpleDateFormat")
                 override fun onResponse(response: JSONObject?) {
-                    loading_indicator.visibility = View.GONE
-                    //TODO("Not yet implemented")
+                    lottieListLoading?.visibility = View.GONE
                     val status = response?.getBoolean("sukses")
                     if (status!!) {
 
@@ -89,11 +79,11 @@ class user_book_history : Fragment() {
                             .length()
 
                         if(totalRoom<1){
-                            recyclerViewOrder.visibility = View.VISIBLE
-                            lottieListLoading.visibility = View.GONE
+                            recyclerViewOrder?.visibility = View.VISIBLE
+                            lottieListLoading?.visibility = View.GONE
                             makeToast("You have not book any room yet")
                         }
-                        makeToast(totalRoom.toString())
+                        makeToast("Total Order : ${totalRoom.toString()}")
                         val raz = response.getJSONArray("data")
                         for (i in 0 until raz.length()) {
                             val id = raz.getJSONObject(i).getString("id")
@@ -128,30 +118,39 @@ class user_book_history : Fragment() {
                             )
 
                             if (data.size <1){
-                                recyclerViewOrder.visibility = View.VISIBLE
-                                lottieListLoading.visibility = View.GONE
+                                recyclerViewOrder?.visibility = View.VISIBLE
+                                lottieListLoading?.visibility = View.GONE
                             }
 
                             adapterOrder = order_basic_adapter(data,context,view!!)
-                            recyclerViewOrder.adapter = adapterOrder
-                            recyclerViewOrder.visibility = View.VISIBLE
-                            lottieListLoading.visibility = View.GONE
+                            recyclerViewOrder?.adapter = adapterOrder
+                            recyclerViewOrder?.visibility = View.VISIBLE
+                            lottieListLoading?.visibility = View.GONE
                         }
 
                     } else {
-                            recyclerViewOrder.visibility = View.VISIBLE
-                            lottieListLoading.visibility = View.GONE
+                            recyclerViewOrder?.visibility = View.VISIBLE
+                            lottieListLoading?.visibility = View.GONE
                     }
                 }
 
                 override fun onError(anError: ANError) {
                     //TODO("Not yet implemented")
-                    loading_indicator.visibility = View.GONE
+//                    loading_indicator.visibility = View.GONE
                     makeToast("onError")
                     makeToast("Error " + anError.errorBody.toString())
                 }
 
             })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recyclerViewOrder.setHasFixedSize(true)
+        recyclerViewOrder.layoutManager = LinearLayoutManager(
+            context, RecyclerView.VERTICAL,false)
+        retreiveOrder()
+        adapterOrder= order_basic_adapter(data,context!!,getView()!!)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     fun makeToast(message: String) {

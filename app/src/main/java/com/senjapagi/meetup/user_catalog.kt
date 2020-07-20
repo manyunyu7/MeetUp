@@ -17,6 +17,8 @@ import com.senjapagi.meetup.ModelAdapter.model_room
 import com.senjapagi.meetup.ModelAdapter.room_adapter
 import com.senjapagi.meetup.Preference.URL
 import kotlinx.android.synthetic.main.fragment_room_catalog.*
+import kotlinx.android.synthetic.main.fragment_room_catalog.lottieListLoading
+import kotlinx.android.synthetic.main.fragment_user_book_history.*
 import kotlinx.android.synthetic.main.list_foto_loading.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -77,19 +79,18 @@ class room_catalog : Fragment() {
 
     fun retreiveRoom(){
         data.clear()
-        loading_indicator.visibility = View.VISIBLE
+        lottieListLoading.visibility = View.VISIBLE
         AndroidNetworking.get(URL.ROOM_ALL)
             .setPriority(Priority.HIGH)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener{
                 override fun onResponse(response: JSONObject?) {
-                    loading_indicator.visibility = View.GONE
+                    lottieListLoading.visibility = View.GONE
                     //TODO("Not yet implemented")
                     val status = response?.getBoolean("sukses")
                     if(status!!){
                         val totalRoom = response.getJSONArray("data")
                             .length()
-                        makeToast(totalRoom.toString())
                         val raz = response.getJSONArray("data")
                         for (i in 0 until raz.length()){
                             val id = raz.getJSONObject(i).getString("id")
@@ -100,7 +101,7 @@ class room_catalog : Fragment() {
                             val counter = raz.getJSONObject(i).getString("booked_count")
                             val rate = raz.getJSONObject(i).getString("rate_avg")
                             data.add(model_room(
-                                id,name,capacity,thumbnail,desc,"Booked $counter times",rate
+                                id,name,capacity,thumbnail,desc,"Booked $counter times",rate,"0"
                             ))
                             recyclerViewRoom.adapter = adapterRoom
                             recyclerViewRoom.visibility = View.VISIBLE
@@ -117,7 +118,7 @@ class room_catalog : Fragment() {
 
                 override fun onError(anError: ANError) {
                     //TODO("Not yet implemented")
-                    loading_indicator.visibility = View.GONE
+                    lottieListLoading.visibility = View.GONE
                     makeToast("onError")
                     makeToast("Error "+anError.errorBody.toString())
                 }

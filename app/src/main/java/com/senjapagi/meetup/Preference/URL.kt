@@ -29,7 +29,6 @@ object URL {
 
     const val USER_RATE_ORDER = "http://103.253.27.125:10000/booking/index.php?/api/user/daftarpemesanan/"
 
-
     const val ORDER_LIST_BY_USER = "http://103.253.27.125:10000/booking/index.php?/api/user/daftarpemesanan"
 
 //http://103.253.27.125:10000/booking/index.php?/api/user/daftarpemesanan

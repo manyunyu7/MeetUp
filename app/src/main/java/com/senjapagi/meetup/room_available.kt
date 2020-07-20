@@ -23,6 +23,7 @@ class room_available : AppCompatActivity() {
     lateinit var start: String
     lateinit var end: String
     lateinit var pax: String
+    lateinit var paxOrder: String
     lateinit var dialog: SweetAlertDialog
 
     var data = ArrayList<model_room>()
@@ -36,9 +37,9 @@ class room_available : AppCompatActivity() {
 
         start = intent.getStringExtra("start")
         end = intent.getStringExtra("end")
-        pax = intent.getStringExtra("pax")
+        paxOrder = intent.getStringExtra("pax")
 
-        roomCapacity.text = "for $pax pax"
+        roomCapacity.text = "for $paxOrder pax"
         startTime.text = start
         endTime.text = end
 
@@ -52,7 +53,6 @@ class room_available : AppCompatActivity() {
         )
 
         getAvail()
-
         backButton.setOnClickListener {
             super.onBackPressed()
         }
@@ -62,7 +62,7 @@ class room_available : AppCompatActivity() {
         AndroidNetworking.post(URL.ROOM_AVAIL)
             .addBodyParameter("start", start)
             .addBodyParameter("end", end)
-            .addBodyParameter("capacity", pax)
+            .addBodyParameter("capacity", paxOrder)
             .setPriority(Priority.HIGH)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
@@ -81,6 +81,7 @@ class room_available : AppCompatActivity() {
                             val desc = head.getJSONObject(i).getString("description")
                             val rate = head.getJSONObject(i).getString("rate_avg")
 
+
                             data.add(
                                 model_room(
                                     id = id,
@@ -89,7 +90,8 @@ class room_available : AppCompatActivity() {
                                     thumbnail = thumbnail,
                                     description = desc,
                                     bookCount = "", // empty because there is no data provided in API
-                                    rating = rate
+                                    rating = rate,
+                                    orderPax = paxOrder
                                 )
                             )
                         }

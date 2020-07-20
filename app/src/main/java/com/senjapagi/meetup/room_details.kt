@@ -40,9 +40,9 @@ class room_details : AppCompatActivity() {
     lateinit var pax: String
     lateinit var start: String
     lateinit var end: String
-    lateinit var room_id : String
-    lateinit var user_id : String
-    lateinit var pref : Preference
+    lateinit var room_id: String
+    lateinit var user_id: String
+    lateinit var pref: Preference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +51,13 @@ class room_details : AppCompatActivity() {
         getAccesser = intent?.getStringExtra("accesser").toString()
         adapterRoomImage = room_image_adapter(data, this)
         if (getAccesser != "datePicked") {
-        btnBookRoom.text = "BACK"
-        }else{
+            btnBookRoom.text = "BACK"
+        } else {
             btnBookRoom.text = "BOOK THIS ROOM"
         }
         dialogHelper = DialogHelper(this)
         pref = Preference(this)
-        pax = intent?.getStringExtra("pax").toString()
+        pax = intent?.getStringExtra("order_pax").toString()
         start = intent?.getStringExtra("start").toString()
         end = intent?.getStringExtra("end").toString()
         room_id = pref.getRoomID().toString()
@@ -75,9 +75,10 @@ class room_details : AppCompatActivity() {
             if (getAccesser == "datePicked") {
                 dialogHelper
                     .confirmation(
-                    "Book $name Room For Your Meeting ?",
-                    user_id,start,end,pax,room_id)
-            }else{
+                        "Book $name Room For Your Meeting ?",
+                        user_id, start, end, pax, room_id
+                    )
+            } else {
                 onBackPressed()
             }
         }
@@ -147,9 +148,6 @@ class room_details : AppCompatActivity() {
     }
 
 
-
-
-
 }
 
 
@@ -158,29 +156,38 @@ class DialogHelper constructor(mContext: Context) : AppCompatActivity() {
     var mContext = mContext
 
 
-    fun success(message: String){
+    fun success(message: String) {
         pDialog = SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
         pDialog.apply {
+
             titleText = "Booking Successfully Inputed"
             contentText = message
             confirmText = "Yes"
             setConfirmClickListener { sDialog ->
                 //TODO : ADD INTENT TO SUCCESS
                 sDialog.dismissWithAnimation()
+                changeLayout()
             }
         }
         pDialog.show()
     }
 
-    fun changeLayout(){
+    fun changeLayout() {
 
-        val a = Intent(mContext,dashboard_client::class.java)
-        a.putExtra("success_booking","1")
+        val a = Intent(mContext, dashboard_client::class.java)
+        a.putExtra("success_booking", "1")
         mContext.startActivity(a)
         finish()
     }
 
-    fun confirmation(message:String,user:String,start:String,end:String,pax:String,room:String) {
+    fun confirmation(
+        message: String,
+        user: String,
+        start: String,
+        end: String,
+        pax: String,
+        room: String
+    ) {
         pDialog = SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
         pDialog.apply {
             titleText = "Are you sure"
@@ -188,7 +195,7 @@ class DialogHelper constructor(mContext: Context) : AppCompatActivity() {
             confirmText = "Yes"
             setConfirmClickListener { sDialog ->
                 //TODO : CALL INPUT METHOD
-                inputOrder(user,start,end,pax,room)
+                inputOrder(user, start, end, pax, room)
                 sDialog.dismissWithAnimation()
 
             }
@@ -206,7 +213,7 @@ class DialogHelper constructor(mContext: Context) : AppCompatActivity() {
         pDialog.dismissWithAnimation()
     }
 
-    fun inputOrder(user_id:String,start:String,end:String,pax:String,room_id:String){
+    fun inputOrder(user_id: String, start: String, end: String, pax: String, room_id: String) {
         AndroidNetworking.post(URL.PLACE_BOOKING)
             .addHeaders("user_id", user_id)
             .addBodyParameter("start", start)
@@ -217,17 +224,19 @@ class DialogHelper constructor(mContext: Context) : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject?) {
-                    if(response?.getBoolean("sukses")!!){
+                    if (response?.getBoolean("sukses")!!) {
                         success("Check your booking status at Active Booking Menu")
-                        changeLayout()
-                    }else{
-                        makeToast("""
+
+                    } else {
+                        makeToast(
+                            """
                             user id : $user_id
                             start : $start
                             end : $end
                             pax : $pax
                             room : $room_id
-                        """.trimIndent())
+                        """.trimIndent()
+                        )
                         makeToast(response.toString())
                     }
                 }
@@ -238,6 +247,7 @@ class DialogHelper constructor(mContext: Context) : AppCompatActivity() {
                 }
             })
     }
+
     fun makeToast(message: String) {
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
     }

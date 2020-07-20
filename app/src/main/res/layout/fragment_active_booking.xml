@@ -167,7 +167,4 @@
                 app:lottie_loop="true" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <include
-        android:id="@+id/loading_indicator"
-        layout="@layout/layout_loading_transparent"/>
 </RelativeLayout>

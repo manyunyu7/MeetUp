@@ -7,5 +7,6 @@ data class model_room (
     val thumbnail: String,
     val description : String,
     val bookCount : String,
-    val rating : String
+    val rating : String,
+    val orderPax : String
 )

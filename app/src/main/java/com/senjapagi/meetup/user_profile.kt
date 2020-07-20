@@ -146,13 +146,15 @@ class user_profile : Fragment() {
                         val photo = response.getJSONObject("data").getString("photo")
                         val name = response.getJSONObject("data").getString("name")
                         val email = response.getJSONObject("data").getString("email")
-
+                        userName.text = name
+                        userEmail.text = email
                         oldName = name
                         oldEmail = email
                         oldPhoto = photo
 
                         etName.setText(name)
                         etEmail.setText(email)
+                        makeToast(photo)
                         Picasso.get()
                             .load(URL.USER_THUMBNAIL + photo)
                             .error(R.drawable.profile)
@@ -165,7 +167,7 @@ class user_profile : Fragment() {
 
                                 override fun onError(e: java.lang.Exception?) {
                                     //do smth when there is picture loading error
-                                    makeToast("Error ${e?.localizedMessage.toString()}")
+//                                    makeToast("Error ${e?.localizedMessage.toString()}")
                                 }
                             })
 
